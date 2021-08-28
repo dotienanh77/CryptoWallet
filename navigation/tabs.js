@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
@@ -7,6 +8,20 @@ import {Home, Portfolio, Market, Profile} from '../screens';
 import {COLORS, icons} from '../constants';
 import {TabIcon} from '../components';
 const Tab = createBottomTabNavigator();
+
+const TabBarCustomButton = ({children, onPress}) => {
+  return (
+    <TouchableOpacity
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      onPress={onPress}>
+      {children}
+    </TouchableOpacity>
+  );
+};
 
 const Tabs = () => {
   return (
@@ -58,6 +73,12 @@ const Tabs = () => {
               />
             );
           },
+          tabBarButton: props => (
+            <TabBarCustomButton
+              {...props}
+              onPress={() => console.log('TRade button')}
+            />
+          ),
         }}
       />
       <Tab.Screen

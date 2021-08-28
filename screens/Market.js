@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-
+import {MainLayout} from './';
 const Market = () => {
   return (
-    <View>
-      <Text>Market screen</Text>
-    </View>
+    <MainLayout>
+      <View>
+        <Text>Market screen</Text>
+      </View>
+    </MainLayout>
   );
 };
 export default Market;
