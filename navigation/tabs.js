@@ -25,7 +25,11 @@ const TabBarCustomButton = ({children, onPress}) => {
   );
 };
 
-const Tabs = () => {
+const Tabs = ({setTradeModalVisibility, isTradeModalVisible}) => {
+  function tradeTabButtonOnClickHandler() {
+    setTradeModalVisibility(!isTradeModalVisible);
+  }
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -78,7 +82,7 @@ const Tabs = () => {
           tabBarButton: props => (
             <TabBarCustomButton
               {...props}
-              onPress={() => console.log('TRade button')}
+              onPress={() => tradeTabButtonOnClickHandler()}
             />
           ),
         }}
