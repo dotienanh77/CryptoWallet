@@ -1,3 +1,3 @@
 import TabIcon from './TabIcon';
-export {TabIcon};
-
+import IconTextButton from './IconTextButton';
+export {TabIcon, IconTextButton};
