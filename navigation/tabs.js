@@ -3,6 +3,8 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {connect} from 'react-redux';
+import {setTradeModalVisibility} from '../stores/tab/tabActions';
 
 import {Home, Portfolio, Market, Profile} from '../screens';
 import {COLORS, icons} from '../constants';
@@ -107,4 +109,18 @@ const Tabs = () => {
   );
 };
 
-export default Tabs;
+// export default Tabs;
+
+function mapStateToProps(state) {
+  return {isTradeModalVisible: state.tabReducer.isTradeModalVisible};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setTradeModalVisibility: isVisible => {
+      dispatch(setTradeModalVisibility(isVisible));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
