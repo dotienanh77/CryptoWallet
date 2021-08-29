@@ -46,7 +46,11 @@ const Tabs = ({setTradeModalVisibility, isTradeModalVisible}) => {
         component={Home}
         options={{
           tabBarIcon: ({focused}) => {
-            return <TabIcon focused={focused} icon={icons.home} label="Home" />;
+            if (!isTradeModalVisible) {
+              return (
+                <TabIcon focused={focused} icon={icons.home} label="Home" />
+              );
+            }
           },
         }}
       />
@@ -55,13 +59,15 @@ const Tabs = ({setTradeModalVisibility, isTradeModalVisible}) => {
         component={Portfolio}
         options={{
           tabBarIcon: ({focused}) => {
-            return (
-              <TabIcon
-                focused={focused}
-                icon={icons.briefcase}
-                label="Portfolio"
-              />
-            );
+            if (!isTradeModalVisible) {
+              return (
+                <TabIcon
+                  focused={focused}
+                  icon={icons.briefcase}
+                  label="Portfolio"
+                />
+              );
+            }
           },
         }}
       />
@@ -92,9 +98,11 @@ const Tabs = ({setTradeModalVisibility, isTradeModalVisible}) => {
         component={Market}
         options={{
           tabBarIcon: ({focused}) => {
-            return (
-              <TabIcon focused={focused} icon={icons.market} label="Market" />
-            );
+            if (!isTradeModalVisible) {
+              return (
+                <TabIcon focused={focused} icon={icons.market} label="Market" />
+              );
+            }
           },
         }}
       />
@@ -103,9 +111,15 @@ const Tabs = ({setTradeModalVisibility, isTradeModalVisible}) => {
         component={Profile}
         options={{
           tabBarIcon: ({focused}) => {
-            return (
-              <TabIcon focused={focused} icon={icons.profile} label="Profile" />
-            );
+            if (!isTradeModalVisible) {
+              return (
+                <TabIcon
+                  focused={focused}
+                  icon={icons.profile}
+                  label="Profile"
+                />
+              );
+            }
           },
         }}
       />
