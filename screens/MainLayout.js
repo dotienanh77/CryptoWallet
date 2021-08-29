@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useRef, useEffect} from 'react';
 import {View, Animated} from 'react-native';
-import {COLORS, SIZES, FONTS, icons} from '../constants';
+import {COLORS, SIZES, icons} from '../constants';
 import {IconTextButton} from '../components';
 import {connect} from 'react-redux';
 const MainLayout = ({children, isTradeModalVisible}) => {
@@ -28,6 +29,20 @@ const MainLayout = ({children, isTradeModalVisible}) => {
   return (
     <View style={{flex: 1}}>
       {children}
+      {/* Dim back ground */}
+      {isTradeModalVisible && (
+        <Animated.View
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: COLORS.transparentBlack,
+          }}
+          opacity={modalAnimatedValue}
+        />
+      )}
       {/* Modal */}
       <Animated.View
         style={{
