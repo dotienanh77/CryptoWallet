@@ -24,6 +24,7 @@ const marketReducer = (state = initialState, action) => {
         ...state,
         error: action.payload.error,
       };
+    ///////////
     case marketActions.GET_COIN_MARKET_BEGIN:
       return {
         ...state,
@@ -43,3 +44,5 @@ const marketReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default marketReducer;
