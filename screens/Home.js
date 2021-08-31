@@ -8,7 +8,8 @@ import {getHoldings, getCoinMarket} from '../stores/market/marketActions';
 import {MainLayout} from './';
 import {useFocusEffect} from '@react-navigation/native';
 import {FONTS, COLORS, SIZES, dummyData, icons} from '../constants';
-import {BalanceInfo, IconTextButton} from '../components';
+import {BalanceInfo, IconTextButton, Chart} from '../components';
+
 const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
   useFocusEffect(
     useCallback(() => {
@@ -70,6 +71,10 @@ const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
         {/* Header Section - Wallet Information */}
         {renderWalletInforSection()}
         {/* Chart  */}
+        <Chart
+          containerStyle={{marginTop: SIZES.padding * 2}}
+          chartPrices={coins[0]?.sparkline_in_7d?.price}
+        />
         {/* Top Cryptocurrency  */}
       </View>
     </MainLayout>
