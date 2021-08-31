@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-undef */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useCallback} from 'react';
 import {View, Text} from 'react-native';
@@ -6,7 +8,7 @@ import {getHoldings, getCoinMarket} from '../stores/market/marketActions';
 import {MainLayout} from './';
 import {useFocusEffect} from '@react-navigation/native';
 import {FONTS, COLORS, SIZES, dummyData, icons} from '../constants';
-import {BalanceInfo} from '../components';
+import {BalanceInfo, IconTextButton} from '../components';
 const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
   useFocusEffect(
     useCallback(() => {
@@ -14,6 +16,12 @@ const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
       getCoinMarket();
     }, []),
   );
+  let totalWallet = myHoldings.reduce((a, b) => a + (b.total || 0), 0);
+  let valueChange = myHoldings.reduce(
+    (a, b) => a + (b.holding_value_change_7d || 0),
+    0,
+  );
+  let percChange = (valueChange / (totalWallet - valueChange)) * 100;
 
   function renderWalletInforSection() {
     return (
@@ -27,11 +35,31 @@ const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
         {/* Balance info */}
         <BalanceInfo
           title="Your Wallet"
-          displayAmount="45,000"
-          changePct={2.3}
+          displayAmount={totalWallet}
+          changePct={percChange}
           containerStyle={{marginTop: 50}}
         />
         {/* Button */}
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 30,
+            marginBottom: -15,
+            paddingHorizontal: SIZES.radius,
+          }}>
+          <IconTextButton
+            label="Transfer"
+            icon={icons.send}
+            containerStyle={{flex: 1, height: 40, marginRight: SIZES.radius}}
+            onPress={() => console.log('Transfer')}
+          />
+          <IconTextButton
+            label="Withdraw"
+            icon={icons.withdraw}
+            containerStyle={{flex: 1, height: 40}}
+            onPress={() => console.log('Withdraw')}
+          />
+        </View>
       </View>
     );
   }

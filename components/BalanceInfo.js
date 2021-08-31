@@ -41,7 +41,7 @@ const BalanceInfo = ({title, displayAmount, changePct, containerStyle}) => {
             marginLeft: SIZES.base,
             alignItems: 'flex-end',
             color:
-              changePct == 0
+              changePct === 0
                 ? COLORS.lightGray3
                 : changePct > 0
                 ? COLORS.lightGreen

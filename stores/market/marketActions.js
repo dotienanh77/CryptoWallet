@@ -51,7 +51,7 @@ export function getHoldings(
       .then(response => {
         console.log('Get holding');
         console.log(response);
-        if (response.state === 200) {
+        if (response.status === 200) {
           // Massage the data
           let myHoldings = response.data.map(item => {
             // Retrieve our current holdings  => current quantity
@@ -69,7 +69,8 @@ export function getHoldings(
               current_price: item.current_price,
               qty: coin.qty,
               total: coin.qty * item.current_price,
-              price_change_percentage_7d_in_currency,
+              price_change_percentage_7d_in_currency:
+                item.price_change_percentage_7d_in_currency,
               holding_value_change_7d:
                 (item.current_price - price7d) * coin.qty,
               sparkline_in_7d: {
@@ -95,12 +96,12 @@ export const getCoinMarketBegin = () => ({
   type: GET_COIN_MARKET_BEGIN,
 });
 
-export const getCoinMarketSuccess = () => ({
+export const getCoinMarketSuccess = coins => ({
   type: GET_COIN_MARKET_SUCCESS,
   payload: {coins},
 });
 
-export const getCoinMarketFailure = () => ({
+export const getCoinMarketFailure = error => ({
   type: GET_COIN_MARKET_FAILURE,
   payload: {error},
 });
@@ -128,7 +129,7 @@ export function getCoinMarket(
       .then(response => {
         console.log('GetCoinMarket');
         console.log(response);
-        if (response.state === 200) {
+        if (response.status === 200) {
           dispatch(getCoinMarketSuccess(response.data));
         } else {
           dispatch(getCoinMarketFailure(response.data));
