@@ -59,7 +59,7 @@ const Chart = ({containerStyle, chartPrices}) => {
   };
 
   const getAxisLabelValues = () => {
-    if (chartPrices != undefined) {
+    if (chartPrices !== undefined) {
       let minValue = Math.min(...chartPrices);
       let maxValue = Math.max(...chartPrices);
 
