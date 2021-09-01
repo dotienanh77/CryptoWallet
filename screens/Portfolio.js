@@ -44,27 +44,6 @@ const Porfolio = ({getHoldings, myHoldings}) => {
             marginBottom: SIZES.padding,
           }}
         />
-        {/* Button */}
-        {/* <View
-          style={{
-            flexDirection: 'row',
-            marginTop: 30,
-            marginBottom: -15,
-            paddingHorizontal: SIZES.radius,
-          }}>
-          <IconTextButton
-            label="Transfer"
-            icon={icons.send}
-            containerStyle={{flex: 1, height: 40, marginRight: SIZES.radius}}
-            onPress={() => console.log('Transfer')}
-          />
-          <IconTextButton
-            label="Withdraw"
-            icon={icons.withdraw}
-            containerStyle={{flex: 1, height: 40}}
-            onPress={() => console.log('Withdraw')}
-          />
-        </View> */}
       </View>
     );
   }
@@ -74,7 +53,12 @@ const Porfolio = ({getHoldings, myHoldings}) => {
         {/* Header - current Balance */}
         {renderCurrentBalanceSection()}
         {/* Chart */}
-
+        <Chart
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          chartPrices={myHoldings[0]?.sparkline_in_7d?.value}
+        />
         {/* Your Assets */}
       </View>
     </MainLayout>
