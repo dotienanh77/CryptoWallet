@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {getHoldings, getCoinMarket} from '../stores/market/marketActions';
@@ -11,6 +11,8 @@ import {FONTS, COLORS, SIZES, dummyData, icons} from '../constants';
 import {BalanceInfo, IconTextButton, Chart} from '../components';
 
 const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
+  const [selectedCoin, setSelectedCoin] = useState(null);
+
   useFocusEffect(
     useCallback(() => {
       getHoldings((holdings = dummyData.holdings));
@@ -73,7 +75,11 @@ const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
         {/* Chart  */}
         <Chart
           containerStyle={{marginTop: SIZES.padding * 2}}
-          chartPrices={coins[0]?.sparkline_in_7d?.price}
+          chartPrices={
+            selectedCoin
+              ? selectedCoin?.sparkline_in_7d?.price
+              : coins[0]?.sparkline_in_7d?.price
+          }
         />
         {/* Top Cryptocurrency  */}
 
@@ -106,7 +112,7 @@ const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
-                onPress={() => console.log('onPress')}>
+                onPress={() => setSelectedCoin(item)}>
                 {/* Logo */}
                 <View style={{width: 35}}>
                   <Image
@@ -164,6 +170,7 @@ const Home = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
               </TouchableOpacity>
             );
           }}
+          ListFooterComponent={<View style={{marginBottom: 50}} />}
         />
       </View>
     </MainLayout>
